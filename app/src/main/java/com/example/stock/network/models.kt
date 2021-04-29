@@ -6,6 +6,11 @@ import kotlinx.serialization.Serializable
 data class Stock(
     val symbol: String,
     val name: String,
-    val price: String,
+    val price: Double,
     val exchange: String
+)
+
+@Serializable
+data class StockResponse(
+    val symbolsList: List<Stock>
 )
