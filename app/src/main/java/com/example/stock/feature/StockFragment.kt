@@ -1,4 +1,6 @@
 package com.example.stock.feature
 
-class StockFragment {
+import androidx.fragment.app.Fragment
+
+class StockFragment: Fragment() {
 }
