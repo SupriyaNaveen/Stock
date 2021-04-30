@@ -4,12 +4,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.stock.network.StockApiQuery
 import dagger.android.AndroidInjection
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), HasAndroidInjector {
+class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var stockApiQuery: StockApiQuery
 
@@ -20,8 +17,4 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         AndroidInjection.inject(this)
         stockApiQuery()
     }
-
-    @Inject
-    lateinit var injector: DispatchingAndroidInjector<Any>
-    override fun androidInjector(): AndroidInjector<Any> = injector
 }
