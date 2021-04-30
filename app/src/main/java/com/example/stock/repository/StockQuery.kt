@@ -1,8 +1,7 @@
 package com.example.stock.repository
 
+import com.example.stock.repository.entities.StockEntity
 import io.reactivex.Observable
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 
 class StockQuery(
     private val database: AppDatabase

@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "6ffed87536f4ad10697be4793bce4ced",
+    "identityHash": "cadfe9d1f1c2d08f7cc3fcd453736dc0",
     "entities": [
       {
         "tableName": "stock",
@@ -41,12 +41,44 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "stockProfile",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`symbol` TEXT NOT NULL, `changesPercentage` TEXT NOT NULL, `image` TEXT NOT NULL, PRIMARY KEY(`symbol`))",
+        "fields": [
+          {
+            "fieldPath": "symbol",
+            "columnName": "symbol",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "changesPercentage",
+            "columnName": "changesPercentage",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "image",
+            "columnName": "image",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "symbol"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6ffed87536f4ad10697be4793bce4ced')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'cadfe9d1f1c2d08f7cc3fcd453736dc0')"
     ]
   }
 }

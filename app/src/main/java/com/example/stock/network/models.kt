@@ -14,3 +14,15 @@ data class Stock(
 data class StockResponse(
     val symbolsList: List<Stock>
 )
+
+@Serializable
+data class StockProfileResponse(
+    val symbol: String,
+    val profile: StockProfile
+)
+
+@Serializable
+data class StockProfile(
+    val image: String,
+    val changesPercentage: String
+)

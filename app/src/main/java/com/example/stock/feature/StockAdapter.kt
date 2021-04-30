@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stock.R
-import com.example.stock.repository.StockEntity
+import com.example.stock.repository.entities.StockEntity
 
 class StockAdapter() : RecyclerView.Adapter<StockAdapter.StockViewHolder>() {
 
