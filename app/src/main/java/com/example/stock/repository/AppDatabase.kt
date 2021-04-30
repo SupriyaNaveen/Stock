@@ -1,6 +1,7 @@
 package com.example.stock.repository
 
 import androidx.annotation.WorkerThread
+import io.reactivex.Single
 import javax.inject.Provider
 
 class AppDatabase(
@@ -10,4 +11,7 @@ class AppDatabase(
     val connect: StockDatabase
         @WorkerThread
         get() = database.get()
+
+    val connectSingle: Single<StockDatabase>
+        get() = Single.just(database.get())
 }

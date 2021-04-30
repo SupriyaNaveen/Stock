@@ -5,19 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stock.R
-import dagger.android.support.AndroidSupportInjection
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class StockFragment : Fragment() {
-    @Inject lateinit var stockAdapter: StockAdapter
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        AndroidSupportInjection.inject(this)
-    }
+    @Inject
+    lateinit var stockAdapter: StockAdapter
+    private val viewModel: StockViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,10 +29,14 @@ class StockFragment : Fragment() {
         val stockRecyclerView: RecyclerView = view.findViewById(R.id.stocksRecyclerView)
         stockRecyclerView.adapter = stockAdapter
 
-        val dividerItemDecoration = DividerItemDecoration(
-            stockRecyclerView.context,
-            RecyclerView.VERTICAL
-        )
+        val dividerItemDecoration =
+            DividerItemDecoration(stockRecyclerView.context, RecyclerView.VERTICAL)
         stockRecyclerView.addItemDecoration(dividerItemDecoration)
+
+        viewModel
+            .getStocks()
+            .observe(viewLifecycleOwner, {
+                stockAdapter.submitStocks(it)
+            })
     }
 }

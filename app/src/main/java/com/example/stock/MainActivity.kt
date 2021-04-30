@@ -3,9 +3,10 @@ package com.example.stock
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.stock.network.StockApiQuery
-import dagger.android.AndroidInjection
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var stockApiQuery: StockApiQuery
@@ -13,8 +14,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        AndroidInjection.inject(this)
         stockApiQuery()
     }
 }
