@@ -6,7 +6,8 @@
 
     <fragment
         android:id="@+id/stockFragment"
-        android:name="com.example.stock.feature.StockFragment">
+        android:name="com.example.stock.feature.StockFragment"
+        android:label="@string/stock_name">
 
         <action
             android:id="@+id/action_stockFragment_to_stockDetailsFragment"
@@ -22,5 +23,10 @@
     <fragment
         android:id="@+id/stockDetailsFragment"
         android:name="com.example.stock.feature.StockDetailsFragment" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.stock.feature.SettingsFragment"
+        android:label="@string/settings_name" />
 
 </navigation>

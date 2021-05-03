@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.stock.BuildConfig
 import com.example.stock.network.StockApi
 import com.example.stock.network.StockPriceResponse
 import com.example.stock.repository.StockDetails
@@ -23,7 +24,7 @@ class StockDetailsViewModel @Inject constructor(
     private val api: StockApi
 ) : ViewModel() {
     private val disposables = CompositeDisposable()
-    private lateinit var priceJob: Job
+    private var isActive: Boolean = true
     private val stockDetails: MutableLiveData<StockDetails> by lazy {
         MutableLiveData<StockDetails>()
     }
@@ -54,12 +55,12 @@ class StockDetailsViewModel @Inject constructor(
     }
 
     private fun refreshPrice(symbol: String) {
-        priceJob = CoroutineScope(Dispatchers.IO)
+        CoroutineScope(Dispatchers.IO)
             .launch {
-                while (true) {
+                while (isActive) {
                     try {
                         stockPrice.postValue(api.stocksPrice(symbol))
-                        delay(TimeUnit.SECONDS.toMillis(15))
+                        delay(TimeUnit.SECONDS.toMillis(BuildConfig.REFRESH_TIME))
                     } catch (e: Exception) {
                         Log.e(StockDetailsViewModel::class.java.simpleName, e.toString())
                     }
@@ -71,6 +72,6 @@ class StockDetailsViewModel @Inject constructor(
     override fun onCleared() {
         super.onCleared()
         disposables.clear()
-        priceJob.cancel()
+        isActive = false
     }
 }
