@@ -7,8 +7,12 @@ import androidx.room.PrimaryKey
 data class StockProfileEntity(
     @PrimaryKey val symbol: String,
     val changesPercentage: String,
-    val image: String
-) {
+    val image: String,
+    val changes: Double,
+    val industry: String,
+    val lastDiv: String,
+    val sector: String
+    ) {
     val isPositive: Boolean
-            get() = changesPercentage.contains("+")
+        get() = changesPercentage.contains("+")
 }

@@ -32,7 +32,11 @@ class StockProfileApiQuery(
                                             StockProfileEntity(
                                                 symbol = it.symbol,
                                                 changesPercentage = it.profile.changesPercentage,
-                                                image = it.profile.image
+                                                image = it.profile.image,
+                                                changes = it.profile.changes,
+                                                lastDiv = it.profile.lastDiv,
+                                                sector = it.profile.lastDiv,
+                                                industry = it.profile.industry
                                             )
                                         )
                                 }

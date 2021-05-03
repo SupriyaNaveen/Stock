@@ -1,11 +1,10 @@
 package com.example.stock.feature
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import com.example.stock.repository.StockDetails
+import com.example.stock.repository.StockDetailsQuery
 import com.example.stock.repository.StockProfileData
-import com.example.stock.repository.StockQuery
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -13,28 +12,25 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 @HiltViewModel
-class StockViewModel @Inject constructor(
-    private val stockQuery: StockQuery
+class StockDetailsViewModel @Inject constructor(
+    private val stockDetailsQuery: StockDetailsQuery
 ) : ViewModel() {
     private val disposables = CompositeDisposable()
-
-    private val stocks: MutableLiveData<List<StockProfileData>> by lazy {
-        MutableLiveData<List<StockProfileData>>().also {
-            loadStocks()
-        }
+    private val stockDetails: MutableLiveData<StockDetails> by lazy {
+        MutableLiveData<StockDetails>()
     }
 
-    fun getStocks(): LiveData<List<StockProfileData>> {
-        return stocks
+    fun getStockDetails(): LiveData<StockDetails> {
+        return stockDetails
     }
 
-    private fun loadStocks() {
-        stockQuery()
+    fun loadStockDetails(symbol:String) {
+        stockDetailsQuery(symbol)
             .subscribeOn(Schedulers.io())
             .subscribe(
-                { stocks.postValue(it) },
+                { stockDetails.postValue(it) },
                 {
-                    Log.e(StockViewModel::class.java.simpleName, "Error: $it")
+                    Log.e(StockDetailsViewModel::class.java.simpleName, "Error: $it")
                 }
             )
             .addTo(disposables)

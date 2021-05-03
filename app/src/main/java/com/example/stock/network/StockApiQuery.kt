@@ -8,6 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
+// TODO: Write this block in Work manager
 class StockApiQuery(
     private val api: StockApi,
     private val database: AppDatabase,

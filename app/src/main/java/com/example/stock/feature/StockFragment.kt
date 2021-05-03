@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stock.R
@@ -38,5 +39,12 @@ class StockFragment : Fragment() {
             .observe(viewLifecycleOwner, {
                 stockAdapter.submitStocks(it)
             })
+
+        stockAdapter.onStockSelected = {
+            findNavController().navigate(
+                StockFragmentDirections.actionStockFragmentToStockDetailsFragment(it)
+            )
+        }
     }
+
 }

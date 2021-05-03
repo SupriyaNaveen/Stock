@@ -3,6 +3,7 @@ package com.example.stock.repository.di
 import android.app.Application
 import com.example.stock.repository.AppDatabase
 import com.example.stock.repository.StockDatabase
+import com.example.stock.repository.StockDetailsQuery
 import com.example.stock.repository.StockQuery
 import dagger.Module
 import dagger.Provides
@@ -29,4 +30,8 @@ object DatabaseModule {
     @Provides
     fun providesStockQuery(database: AppDatabase): StockQuery =
         StockQuery(database = database)
+
+    @Provides
+    fun providesStockDetailsQuery(database: AppDatabase): StockDetailsQuery =
+        StockDetailsQuery(database = database)
 }

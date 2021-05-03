@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "cadfe9d1f1c2d08f7cc3fcd453736dc0",
+    "identityHash": "68263a630781c48bb86043cd4e12c5fb",
     "entities": [
       {
         "tableName": "stock",
@@ -44,7 +44,7 @@
       },
       {
         "tableName": "stockProfile",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`symbol` TEXT NOT NULL, `changesPercentage` TEXT NOT NULL, `image` TEXT NOT NULL, PRIMARY KEY(`symbol`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`symbol` TEXT NOT NULL, `changesPercentage` TEXT NOT NULL, `image` TEXT NOT NULL, `changes` REAL NOT NULL, `industry` TEXT NOT NULL, `lastDiv` TEXT NOT NULL, `sector` TEXT NOT NULL, PRIMARY KEY(`symbol`))",
         "fields": [
           {
             "fieldPath": "symbol",
@@ -63,6 +63,30 @@
             "columnName": "image",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "changes",
+            "columnName": "changes",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "industry",
+            "columnName": "industry",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastDiv",
+            "columnName": "lastDiv",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sector",
+            "columnName": "sector",
+            "affinity": "TEXT",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -78,7 +102,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'cadfe9d1f1c2d08f7cc3fcd453736dc0')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '68263a630781c48bb86043cd4e12c5fb')"
     ]
   }
 }

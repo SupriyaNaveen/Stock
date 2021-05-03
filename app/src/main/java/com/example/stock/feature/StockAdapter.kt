@@ -9,21 +9,28 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.stock.R
-import com.example.stock.repository.entities.StockProfileData
+import com.example.stock.repository.StockProfileData
 
 // TODO: Use paged adapter, try binding for view holder
 class StockAdapter() : RecyclerView.Adapter<StockAdapter.StockViewHolder>() {
 
     private var stocks: List<StockProfileData> = emptyList()
+    var onStockSelected: ((String) -> Unit)? = null
 
     // https://developer.android.com/guide/topics/ui/layout/recyclerview
-    class StockViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class StockViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val companyImageView: ImageView = itemView.findViewById(R.id.companyImageView)
         val changesPercentageTextView: TextView =
             itemView.findViewById(R.id.changesPercentageTextView)
         val symbolTextView: TextView = itemView.findViewById(R.id.symbolTextView)
         val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
         val priceTextView: TextView = itemView.findViewById(R.id.priceTextView)
+
+        init {
+            itemView.setOnClickListener {
+                onStockSelected?.invoke(stocks[bindingAdapterPosition].stockEntity.symbol)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StockViewHolder {

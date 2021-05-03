@@ -1,6 +1,5 @@
 package com.example.stock.repository
 
-import com.example.stock.repository.entities.StockProfileData
 import io.reactivex.Observable
 
 class StockQuery(

@@ -2,10 +2,9 @@ package com.example.stock.repository.dao
 
 import androidx.annotation.WorkerThread
 import androidx.room.*
+import com.example.stock.repository.StockProfileData
 import com.example.stock.repository.entities.StockEntity
-import com.example.stock.repository.entities.StockProfileData
 import com.example.stock.repository.entities.StockProfileEntity
-import io.reactivex.Completable
 import io.reactivex.Observable
 
 // https://developer.android.com/training/data-storage/room/accessing-data
@@ -22,4 +21,8 @@ interface StockDao {
     @Transaction
     @Query("SELECT * FROM `stock`, `stockProfile` WHERE `stock`.symbol = `stockProfile`.symbol")
     fun loadStocks(): Observable<List<StockProfileData>>
+
+    @Transaction
+    @Query("SELECT * FROM `stock`, `stockProfile` WHERE `stock`.symbol = `stockProfile`.symbol AND `stockProfile`.symbol = :symbol")
+    fun stockDetails(symbol: String): Observable<StockProfileData>
 }

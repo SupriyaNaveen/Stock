@@ -23,6 +23,10 @@ data class StockProfileResponse(
 
 @Serializable
 data class StockProfile(
+    val changesPercentage: String,
     val image: String,
-    val changesPercentage: String
+    val changes: Double,
+    val industry: String,
+    val lastDiv: String,
+    val sector: String
 )
