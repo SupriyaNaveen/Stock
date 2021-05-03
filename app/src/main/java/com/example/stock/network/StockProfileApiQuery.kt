@@ -13,6 +13,9 @@ class StockProfileApiQuery(
     private val database: AppDatabase
 ) : (List<Stock>) -> Unit {
     override fun invoke(stocks: List<Stock>) {
+        // TODO: Add paged network calls here
+        // Tried making single network call, using
+        // stocks.joinToString(",") { it.symbol }, but request is too lengthy not a good way
         CoroutineScope(Dispatchers.IO)
             .launch {
                 stocks

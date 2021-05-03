@@ -8,4 +8,7 @@ data class StockProfileEntity(
     @PrimaryKey val symbol: String,
     val changesPercentage: String,
     val image: String
-)
+) {
+    val isPositive: Boolean
+            get() = changesPercentage.contains("+")
+}

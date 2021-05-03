@@ -10,6 +10,8 @@
         android:id="@+id/companyImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:minWidth="@dimen/forty_eight_dp"
+        android:minHeight="@dimen/forty_eight_dp"
         android:contentDescription="@null"
         app:layout_constraintBottom_toBottomOf="@id/priceTextView"
         app:layout_constraintStart_toStartOf="parent"

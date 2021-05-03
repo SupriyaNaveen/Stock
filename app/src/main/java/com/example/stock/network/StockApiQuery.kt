@@ -36,7 +36,7 @@ class StockApiQuery(
                                 .stockDao()
                                 .insertStocks(*stocks.toTypedArray())
                         }
-                }catch (e: Exception) {
+                } catch (e: Exception) {
                     Log.e(StockApiQuery::class.java.simpleName, e.toString())
                 }
 
