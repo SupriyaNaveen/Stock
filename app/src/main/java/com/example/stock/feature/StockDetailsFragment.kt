@@ -1,6 +1,7 @@
 package com.example.stock.feature
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,6 +33,10 @@ class StockDetailsFragment : Fragment() {
         viewModel.getStockDetails().observe(viewLifecycleOwner, {
             binding.stockDetails = it
             binding.companyImageView.load(it.image)
+        })
+        viewModel.getStockPrice().observe(viewLifecycleOwner, {
+            Log.i(StockDetailsFragment::class.java.simpleName, "Updating price to ${it.price}")
+            binding.price = it.price.toString()
         })
     }
 }

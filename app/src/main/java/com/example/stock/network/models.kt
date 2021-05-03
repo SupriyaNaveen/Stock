@@ -1,5 +1,6 @@
 package com.example.stock.network
 
+import androidx.annotation.Keep
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -29,4 +30,10 @@ data class StockProfile(
     val industry: String,
     val lastDiv: String,
     val sector: String
+)
+
+@Serializable
+data class StockPriceResponse(
+    val symbol: String,
+    val price: Double
 )

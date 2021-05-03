@@ -6,6 +6,10 @@
         <variable
             name="stockDetails"
             type="com.example.stock.repository.StockDetails" />
+
+        <variable
+            name="price"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -56,6 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/eight_dp"
             android:layout_marginTop="@dimen/eight_dp"
+            android:text="@{price}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/nameTextView"
             tools:text="Price" />
