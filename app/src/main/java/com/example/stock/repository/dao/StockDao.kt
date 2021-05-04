@@ -1,6 +1,7 @@
 package com.example.stock.repository.dao
 
 import androidx.annotation.WorkerThread
+import androidx.paging.PagingSource
 import androidx.room.*
 import com.example.stock.repository.StockProfileData
 import com.example.stock.repository.entities.StockEntity
@@ -20,7 +21,7 @@ interface StockDao {
 
     @Transaction
     @Query("SELECT * FROM `stock`, `stockProfile` WHERE `stock`.symbol = `stockProfile`.symbol")
-    fun loadStocks(): Observable<List<StockProfileData>>
+    fun loadStocks(): PagingSource<Int, StockProfileData>
 
     @Transaction
     @Query("SELECT * FROM `stock`, `stockProfile` WHERE `stock`.symbol = `stockProfile`.symbol AND `stockProfile`.symbol = :symbol")

@@ -13,17 +13,18 @@ import okhttp3.OkHttpClient
 import okhttp3.Response
 import retrofit2.Retrofit
 import java.util.*
+import javax.inject.Singleton
 
 // https://github.com/Kotlin/kotlinx.serialization/
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    @Provides
+    @[Provides Singleton]
     fun providesConfigurationInterceptor(): ConfigurationInterceptor =
         ConfigurationInterceptor()
 
-    @Provides
+    @[Provides Singleton]
     fun providesOkHttpClient(
         interceptor: ConfigurationInterceptor
     ): OkHttpClient =
@@ -32,7 +33,7 @@ object NetworkModule {
             .addInterceptor(interceptor)
             .build()
 
-    @Provides
+    @[Provides Singleton]
     fun providesRetrofitBuilder(
         okHttpClient: OkHttpClient
     ): Retrofit {
@@ -48,7 +49,7 @@ object NetworkModule {
             .build()
     }
 
-    @Provides
+    @[Provides Singleton]
     fun providesStockApi(retrofit: Retrofit): StockApi =
         retrofit.create(StockApi::class.java)
 }

@@ -6,15 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.stock.R
 import com.example.stock.repository.StockProfileData
 
-// TODO: Use paged adapter, try binding for view holder
-class StockAdapter() : RecyclerView.Adapter<StockAdapter.StockViewHolder>() {
+class StockAdapter :
+    PagingDataAdapter<StockProfileData, StockAdapter.StockViewHolder>(DIFF_CALLBACK) {
 
-    private var stocks: List<StockProfileData> = emptyList()
     var onStockSelected: ((String) -> Unit)? = null
 
     // https://developer.android.com/guide/topics/ui/layout/recyclerview
@@ -28,7 +29,9 @@ class StockAdapter() : RecyclerView.Adapter<StockAdapter.StockViewHolder>() {
 
         init {
             itemView.setOnClickListener {
-                onStockSelected?.invoke(stocks[bindingAdapterPosition].stockEntity.symbol)
+                val symbol = getItem(bindingAdapterPosition)?.stockEntity?.symbol
+                    ?: return@setOnClickListener
+                onStockSelected?.invoke(symbol)
             }
         }
     }
@@ -41,7 +44,7 @@ class StockAdapter() : RecyclerView.Adapter<StockAdapter.StockViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: StockViewHolder, position: Int) {
-        val rowData = stocks[position]
+        val rowData = getItem(position) ?: return
         holder.apply {
             symbolTextView.text = rowData.stockEntity.symbol
             nameTextView.text = rowData.stockEntity.name
@@ -54,10 +57,18 @@ class StockAdapter() : RecyclerView.Adapter<StockAdapter.StockViewHolder>() {
         }
     }
 
-    override fun getItemCount(): Int = stocks.size
+    companion object {
+        private val DIFF_CALLBACK = object :
+            DiffUtil.ItemCallback<StockProfileData>() {
+            override fun areItemsTheSame(
+                oldStock: StockProfileData,
+                newStock: StockProfileData
+            ) = oldStock.stockEntity.symbol == newStock.stockEntity.symbol
 
-    fun submitStocks(stockList: List<StockProfileData>) {
-        stocks = stockList
-        notifyDataSetChanged()
+            override fun areContentsTheSame(
+                oldStock: StockProfileData,
+                newStock: StockProfileData
+            ) = oldStock == newStock
+        }
     }
 }

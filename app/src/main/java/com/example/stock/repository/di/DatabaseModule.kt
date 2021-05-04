@@ -10,20 +10,21 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Provider
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
 
-    @Provides
+    @[Provides Singleton]
     fun providesStockDatabaseFactory(app: Application): StockDatabase.Factory =
         StockDatabase.Factory(app)
 
-    @Provides
+    @[Provides Singleton]
     fun providesStockDatabase(factory: StockDatabase.Factory): StockDatabase =
         factory.newInstance()
 
-    @Provides
+    @[Provides Singleton]
     fun providesAppDatabase(database: Provider<StockDatabase>): AppDatabase =
         AppDatabase(database = database)
 

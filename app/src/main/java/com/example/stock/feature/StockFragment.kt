@@ -6,11 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stock.R
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -34,11 +37,11 @@ class StockFragment : Fragment() {
             DividerItemDecoration(stockRecyclerView.context, RecyclerView.VERTICAL)
         stockRecyclerView.addItemDecoration(dividerItemDecoration)
 
-        viewModel
-            .getStocks()
-            .observe(viewLifecycleOwner, {
-                stockAdapter.submitStocks(it)
-            })
+        lifecycleScope.launch {
+                viewModel
+                    .loadStocks()
+                    .collectLatest { stockAdapter.submitData(it) }
+            }
 
         stockAdapter.onStockSelected = {
             findNavController().navigate(
