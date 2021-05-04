@@ -35,7 +35,7 @@ class StockProfileApiQuery(
                                                 image = it.profile.image,
                                                 changes = it.profile.changes,
                                                 lastDiv = it.profile.lastDiv,
-                                                sector = it.profile.lastDiv,
+                                                sector = it.profile.sector,
                                                 industry = it.profile.industry
                                             )
                                         )

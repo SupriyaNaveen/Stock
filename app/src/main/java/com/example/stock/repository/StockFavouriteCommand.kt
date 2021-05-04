@@ -3,7 +3,7 @@ package com.example.stock.repository
 import io.reactivex.Single
 
 class StockFavouriteCommand(
-    val database: AppDatabase
+    private val database: AppDatabase
 ) : (String) -> Single<Unit> {
     override fun invoke(symbol: String): Single<Unit> =
         database

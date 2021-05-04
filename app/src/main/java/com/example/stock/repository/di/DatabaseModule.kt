@@ -1,6 +1,7 @@
 package com.example.stock.repository.di
 
 import android.app.Application
+import com.example.stock.feature.AppDispatchers
 import com.example.stock.repository.*
 import dagger.Module
 import dagger.Provides
@@ -36,4 +37,7 @@ object DatabaseModule {
     @Provides
     fun providesStockFavouriteCommand(database: AppDatabase): StockFavouriteCommand =
         StockFavouriteCommand(database = database)
+
+    @Provides @Singleton
+    fun providesCoroutineDispatchers(): AppDispatchers = AppDispatchers()
 }

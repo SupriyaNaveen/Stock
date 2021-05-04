@@ -1,6 +1,7 @@
 package com.example.stock.feature
 
 import android.util.Log
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -22,7 +23,8 @@ import javax.inject.Inject
 class StockDetailsViewModel @Inject constructor(
     private val stockDetailsQuery: StockDetailsQuery,
     // TODO: View model need not access api reference directly, so wrap the query class
-    private val api: StockApi
+    private val api: StockApi,
+    private val dispatchers: AppDispatchers
 ) : ViewModel() {
     private val disposables = CompositeDisposable()
     private var isActive: Boolean = true
@@ -55,8 +57,9 @@ class StockDetailsViewModel @Inject constructor(
         refreshPrice(symbol)
     }
 
-    private fun refreshPrice(symbol: String) {
-        CoroutineScope(Dispatchers.IO)
+    @VisibleForTesting
+    fun refreshPrice(symbol: String) =
+        CoroutineScope(dispatchers.io)
             .launch {
                 while (isActive) {
                     try {
@@ -66,9 +69,8 @@ class StockDetailsViewModel @Inject constructor(
                         Log.e(StockDetailsViewModel::class.java.simpleName, e.toString())
                     }
                 }
-            }
 
-    }
+            }
 
     override fun onCleared() {
         super.onCleared()
