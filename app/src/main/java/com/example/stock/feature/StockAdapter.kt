@@ -13,6 +13,7 @@ import coil.load
 import com.example.stock.R
 import com.example.stock.repository.StockProfileData
 
+// https://developer.android.com/topic/libraries/architecture/paging/v3-overview
 class StockAdapter :
     PagingDataAdapter<StockProfileData, StockAdapter.StockViewHolder>(DIFF_CALLBACK) {
 
@@ -20,6 +21,7 @@ class StockAdapter :
 
     // https://developer.android.com/guide/topics/ui/layout/recyclerview
     inner class StockViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        // TODO: Change to binding view holder
         val companyImageView: ImageView = itemView.findViewById(R.id.companyImageView)
         val changesPercentageTextView: TextView =
             itemView.findViewById(R.id.changesPercentageTextView)
@@ -57,6 +59,7 @@ class StockAdapter :
         }
     }
 
+    // TODO: Inject this callback
     companion object {
         private val DIFF_CALLBACK = object :
             DiffUtil.ItemCallback<StockProfileData>() {

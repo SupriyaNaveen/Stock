@@ -29,6 +29,7 @@ class StockDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // TODO: Try using navArgs ktx
         viewModel.loadStockDetails(requireArguments().getString("symbol") ?: "")
         viewModel.getStockDetails().observe(viewLifecycleOwner, {
             binding.stockDetails = it

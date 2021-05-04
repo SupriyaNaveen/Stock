@@ -19,6 +19,7 @@
         app:srcCompat="@drawable/ic_launcher_background" />
 
     <TextView
+        style="?textStyleH1"
         android:id="@+id/changesPercentageTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,6 +29,7 @@
         tools:text="Changes Percentage" />
 
     <TextView
+        style="?textStyleH2"
         android:id="@+id/symbolTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,6 +40,7 @@
         tools:text="Symbol" />
 
     <TextView
+        style="?textStyleBody"
         android:id="@+id/nameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,6 +51,7 @@
         tools:text="Name" />
 
     <TextView
+        style="?textStyleCaption"
         android:id="@+id/priceTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

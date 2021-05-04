@@ -3,4 +3,5 @@
     <string name="stock_name">Stock</string>
     <string name="settings_name">Settings</string>
     <string name="app_version_name">App Version</string>
+    <string name="dark_theme_title">Dark Theme</string>
 </resources>

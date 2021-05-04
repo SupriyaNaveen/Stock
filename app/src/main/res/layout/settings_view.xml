@@ -15,27 +15,29 @@
 
         <TextView
             android:id="@+id/appVersionTitleTextView"
+            style="?textStyleH2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/sixteen_dp"
             android:layout_marginTop="@dimen/sixteen_dp"
             android:text="@string/app_version_name"
+            app:layout_constraintEnd_toStartOf="@id/appVersionTextView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/appVersionTextView"
             tools:text="App Version" />
 
         <TextView
             android:id="@+id/appVersionTextView"
+            style="?textStyleBody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/sixteen_dp"
-            android:layout_marginTop="@dimen/sixteen_dp"
             android:layout_marginEnd="@dimen/sixteen_dp"
             android:text="@{appVersion}"
+            app:layout_constraintBottom_toBottomOf="@id/appVersionTitleTextView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="App Version" />
+            app:layout_constraintTop_toTopOf="@id/appVersionTitleTextView"
+            tools:text="0.0.1" />
 
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/themeButton"
@@ -44,7 +46,8 @@
             android:layout_marginStart="@dimen/sixteen_dp"
             android:layout_marginTop="@dimen/sixteen_dp"
             android:layout_marginEnd="@dimen/sixteen_dp"
-            android:text="Dark theme"
+            android:text="@string/dark_theme_title"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/appVersionTextView" />
 

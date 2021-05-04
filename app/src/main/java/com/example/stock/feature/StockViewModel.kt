@@ -24,7 +24,6 @@ class StockViewModel @Inject constructor(
     private val stockQuery: StockQuery
 ) : ViewModel() {
 
-    fun loadStocks(): Flow<PagingData<StockProfileData>> {
-        return stockQuery().cachedIn(viewModelScope)
-    }
+    fun loadStocks(): Flow<PagingData<StockProfileData>> =
+        stockQuery().cachedIn(viewModelScope)
 }

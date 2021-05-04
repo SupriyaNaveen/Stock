@@ -21,6 +21,7 @@ import javax.inject.Inject
 @HiltViewModel
 class StockDetailsViewModel @Inject constructor(
     private val stockDetailsQuery: StockDetailsQuery,
+    // TODO: View model need not access api reference directly, so wrap the query class
     private val api: StockApi
 ) : ViewModel() {
     private val disposables = CompositeDisposable()

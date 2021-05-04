@@ -20,11 +20,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // TODO: add back arrow handling
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
+        // Use navigation graph for bottom navigation bar
+        // Reference taken https://github.com/BrianaNzivu/BottomNavigationBar
         val navView = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
-
         val appBarConfiguration = AppBarConfiguration.Builder(
             R.id.stockFragment,
             R.id.settingsFragment
@@ -33,6 +35,8 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
         NavigationUI.setupWithNavController(navView, navController)
 
+        // Fetch the data and save it to storage.
+        // TODO: Move this to Work manager
         stockApiQuery()
     }
 }

@@ -30,6 +30,7 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.appVersion = BuildConfig.APP_VERSION
+        // TODO: Move the preference to dependency injections
         val sharedPreferences = requireContext().getSharedPreferences(
             SettingsFragment::class.simpleName,
             Context.MODE_PRIVATE
@@ -53,6 +54,6 @@ class SettingsFragment : Fragment() {
     }
 
     companion object {
-        private const val DARK_MODE_KEY: String = "IS_DARK_MODE"
+        const val DARK_MODE_KEY: String = "IS_DARK_MODE"
     }
 }
