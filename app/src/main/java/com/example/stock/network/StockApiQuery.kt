@@ -18,18 +18,23 @@ class StockApiQuery(
         CoroutineScope(Dispatchers.IO)
             .launch {
                 try {
+                    val existingStocks = database.connect.stockDao().loadFavoriteStocks()
                     api
                         .stocks()
                         .let { stockResponse ->
                             stockProfileApiQuery(stockResponse.symbolsList)
                             val stocks = stockResponse
                                 .symbolsList
-                                .map {
+                                .map { stock ->
                                     StockEntity(
-                                        symbol = it.symbol,
-                                        price = it.price,
-                                        exchange = it.exchange,
-                                        name = it.name
+                                        symbol = stock.symbol,
+                                        price = stock.price,
+                                        exchange = stock.exchange,
+                                        name = stock.name,
+                                        isFavourite = existingStocks
+                                            .firstOrNull { it.symbol == stock.symbol }
+                                            ?.isFavourite
+                                            ?: false
                                     )
                                 }
                             database

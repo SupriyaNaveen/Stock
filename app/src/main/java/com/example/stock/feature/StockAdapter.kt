@@ -18,6 +18,7 @@ class StockAdapter :
     PagingDataAdapter<StockProfileData, StockAdapter.StockViewHolder>(DIFF_CALLBACK) {
 
     var onStockSelected: ((String) -> Unit)? = null
+    var onFavouriteSelected: ((String) -> Unit)? = null
 
     // https://developer.android.com/guide/topics/ui/layout/recyclerview
     inner class StockViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -28,12 +29,19 @@ class StockAdapter :
         val symbolTextView: TextView = itemView.findViewById(R.id.symbolTextView)
         val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
         val priceTextView: TextView = itemView.findViewById(R.id.priceTextView)
+        val favouriteImageView: ImageView = itemView.findViewById(R.id.favouriteImageView)
 
         init {
             itemView.setOnClickListener {
                 val symbol = getItem(bindingAdapterPosition)?.stockEntity?.symbol
                     ?: return@setOnClickListener
                 onStockSelected?.invoke(symbol)
+            }
+
+            favouriteImageView.setOnClickListener {
+                val symbol = getItem(bindingAdapterPosition)?.stockEntity?.symbol
+                    ?: return@setOnClickListener
+                onFavouriteSelected?.invoke(symbol)
             }
         }
     }
@@ -56,6 +64,7 @@ class StockAdapter :
             changesPercentageTextView.setTextColor(
                 if (rowData.stockProfileEntity.isPositive) Color.GREEN else Color.RED
             )
+            favouriteImageView.isActivated = rowData.stockEntity.isFavourite
         }
     }
 

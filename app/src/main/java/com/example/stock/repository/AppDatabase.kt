@@ -13,5 +13,5 @@ class AppDatabase(
         get() = database.get()
 
     val connectSingle: Single<StockDatabase>
-        get() = Single.just(database.get())
+        get() = Single.just(connect)
 }

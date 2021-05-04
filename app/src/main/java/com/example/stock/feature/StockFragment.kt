@@ -48,6 +48,15 @@ class StockFragment : Fragment() {
                 StockFragmentDirections.actionStockFragmentToStockDetailsFragment(it)
             )
         }
+
+        stockAdapter.onFavouriteSelected = {
+            viewModel.selectFavourite(it)
+        }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        stockAdapter.onFavouriteSelected = null
+        stockAdapter.onStockSelected = null
+    }
 }

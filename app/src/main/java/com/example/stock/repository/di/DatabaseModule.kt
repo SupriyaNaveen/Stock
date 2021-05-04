@@ -1,10 +1,7 @@
 package com.example.stock.repository.di
 
 import android.app.Application
-import com.example.stock.repository.AppDatabase
-import com.example.stock.repository.StockDatabase
-import com.example.stock.repository.StockDetailsQuery
-import com.example.stock.repository.StockQuery
+import com.example.stock.repository.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -35,4 +32,8 @@ object DatabaseModule {
     @Provides
     fun providesStockDetailsQuery(database: AppDatabase): StockDetailsQuery =
         StockDetailsQuery(database = database)
+
+    @Provides
+    fun providesStockFavouriteCommand(database: AppDatabase): StockFavouriteCommand =
+        StockFavouriteCommand(database = database)
 }

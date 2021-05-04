@@ -38,5 +38,7 @@ class MainActivity : AppCompatActivity() {
         // Fetch the data and save it to storage.
         // TODO: Move this to Work manager
         stockApiQuery()
+
+        // TODO: Add theme based on preference value
     }
 }
