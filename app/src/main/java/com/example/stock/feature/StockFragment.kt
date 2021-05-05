@@ -33,10 +33,6 @@ class StockFragment : Fragment() {
         val stockRecyclerView: RecyclerView = view.findViewById(R.id.stocksRecyclerView)
         stockRecyclerView.adapter = stockAdapter
 
-        val dividerItemDecoration =
-            DividerItemDecoration(stockRecyclerView.context, RecyclerView.VERTICAL)
-        stockRecyclerView.addItemDecoration(dividerItemDecoration)
-
         lifecycleScope.launch {
                 viewModel
                     .loadStocks()
