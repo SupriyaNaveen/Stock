@@ -4,6 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.stock.feature.AppDispatchers
 import com.example.stock.feature.StockDetailsViewModel
 import com.example.stock.network.StockApi
+import com.example.stock.network.StockPriceApiQuery
 import com.example.stock.network.StockPriceResponse
 import com.example.stock.repository.StockDetails
 import com.example.stock.repository.StockDetailsQuery
@@ -34,11 +35,11 @@ class StockDetailsViewModelTest {
 
     private fun viewModel(
         stockDetailsQuery: StockDetailsQuery = mockk(relaxed = true),
-        stockApi: StockApi = mockk(relaxed = true)
+        stockPriceApiQuery: StockPriceApiQuery = mockk(relaxed = true)
     ): StockDetailsViewModel =
         StockDetailsViewModel(
             stockDetailsQuery = stockDetailsQuery,
-            api = stockApi,
+            stockPriceApiQuery = stockPriceApiQuery,
             dispatchers = AppDispatchers(io = dispatcher)
         )
 
@@ -91,9 +92,9 @@ class StockDetailsViewModelTest {
         scope.runBlockingTest {
             // Arrange
             val symbol = "symbol"
-            val api: StockApi = mockk(relaxed = true)
-            coEvery { api.stocksPrice(symbol) } returns StockPriceResponse(symbol, 200.87)
-            val viewModel = viewModel(stockApi = api)
+            val stockPriceApiQuery: StockPriceApiQuery = mockk(relaxed = true)
+            coEvery { stockPriceApiQuery.invoke(symbol) } returns StockPriceResponse(symbol, 200.87)
+            val viewModel = viewModel(stockPriceApiQuery = stockPriceApiQuery)
 
             // Act
             val job = viewModel.refreshPrice(symbol)

@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.stock.BuildConfig
 import com.example.stock.network.StockApi
+import com.example.stock.network.StockPriceApiQuery
 import com.example.stock.network.StockPriceResponse
 import com.example.stock.repository.StockDetails
 import com.example.stock.repository.StockDetailsQuery
@@ -22,8 +23,7 @@ import javax.inject.Inject
 @HiltViewModel
 class StockDetailsViewModel @Inject constructor(
     private val stockDetailsQuery: StockDetailsQuery,
-    // TODO: View model need not access api reference directly, so wrap the query class
-    private val api: StockApi,
+    private val stockPriceApiQuery: StockPriceApiQuery,
     private val dispatchers: AppDispatchers
 ) : ViewModel() {
     private val disposables = CompositeDisposable()
@@ -53,17 +53,15 @@ class StockDetailsViewModel @Inject constructor(
                 }
             )
             .addTo(disposables)
-
-        refreshPrice(symbol)
     }
 
-    @VisibleForTesting
     fun refreshPrice(symbol: String) =
         CoroutineScope(dispatchers.io)
             .launch {
                 while (isActive) {
                     try {
-                        stockPrice.postValue(api.stocksPrice(symbol))
+                        val value = stockPriceApiQuery.invoke(symbol) ?: return@launch
+                        stockPrice.postValue(value)
                         delay(TimeUnit.SECONDS.toMillis(BuildConfig.REFRESH_TIME))
                     } catch (e: Exception) {
                         Log.e(StockDetailsViewModel::class.java.simpleName, e.toString())

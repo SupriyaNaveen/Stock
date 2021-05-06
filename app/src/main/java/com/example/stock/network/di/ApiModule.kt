@@ -2,15 +2,16 @@ package com.example.stock.network.di
 
 import com.example.stock.network.StockApi
 import com.example.stock.network.StockApiQuery
+import com.example.stock.network.StockPriceApiQuery
 import com.example.stock.network.StockProfileApiQuery
 import com.example.stock.repository.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.components.SingletonComponent
 
 @Module
-@InstallIn(ActivityComponent::class)
+@InstallIn(SingletonComponent::class)
 object ApiModule {
 
     @Provides
@@ -27,4 +28,10 @@ object ApiModule {
         stockProfileApiQuery: StockProfileApiQuery
     ): StockApiQuery =
         StockApiQuery(api = stockApi, database = database, stockProfileApiQuery)
+
+    @Provides
+    fun providesStockPriceApiQuery(
+        stockApi: StockApi
+    ): StockPriceApiQuery =
+        StockPriceApiQuery(api = stockApi)
 }
